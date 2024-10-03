@@ -16,8 +16,14 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+from config.swagger import swagger_urlpatterns
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/v1/", include("apps.account.urls.v1"), name="accounts"),
+    path("api/v1/technology/", include("apps.technology.urls.v1"), name="technologies"),
+    path("api/v1/", include("apps.job.urls.v1"), name="jobs"),
 ]
+urlpatterns += swagger_urlpatterns
